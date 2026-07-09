@@ -115,7 +115,7 @@ function RouteComponent() {
   }, [providers, router]);
 
   return (
-    <>
+    <div className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm sm:p-8">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-bold tracking-tight">
           <Trans comment="Title on the login page">Sign in to your account</Trans>
@@ -244,6 +244,6 @@ function RouteComponent() {
       )}
 
       <SocialAuth />
-    </>
+    </div>
   );
 }

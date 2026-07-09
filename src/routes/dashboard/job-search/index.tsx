@@ -16,7 +16,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/utils/style";
@@ -63,8 +62,6 @@ function RouteComponent() {
   return (
     <div className="space-y-4">
       <DashboardHeader icon={BriefcaseIcon} title={t`Job Search`} />
-
-      <Separator />
 
       {!isConfigured ? (
         <motion.div

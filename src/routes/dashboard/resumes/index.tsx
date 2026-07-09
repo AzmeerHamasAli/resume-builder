@@ -12,7 +12,6 @@ import z from "zod";
 
 import { Combobox } from "@/components/ui/combobox";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { orpc } from "@/integrations/orpc/client";
 import { cn } from "@/utils/style";
@@ -72,9 +71,7 @@ function RouteComponent() {
     <div className="space-y-4">
       <DashboardHeader icon={ReadCvLogoIcon} title={t`Resumes`} />
 
-      <Separator />
-
-      <div className="flex items-center gap-x-4">
+      <div className="flex flex-wrap items-center gap-4 rounded-xl border border-border/70 bg-card/60 p-4">
         <div className="flex gap-2">
           <Label>
             <Trans>Sort by</Trans>
@@ -120,7 +117,9 @@ function RouteComponent() {
         </Tabs>
       </div>
 
-      {view === "list" ? <ListView resumes={resumes ?? []} /> : <GridView resumes={resumes ?? []} />}
+      <div className="pt-2">
+        {view === "list" ? <ListView resumes={resumes ?? []} /> : <GridView resumes={resumes ?? []} />}
+      </div>
     </div>
   );
 }

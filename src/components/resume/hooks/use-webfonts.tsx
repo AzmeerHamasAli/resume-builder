@@ -11,10 +11,12 @@ export function useWebfonts(typography: z.infer<typeof typographySchema>) {
   const isMounted = useIsMounted();
 
   useEffect(() => {
-    if (!isMounted()) return;
-
     const body = document.body;
     if (body) body.setAttribute("data-wf-loaded", "false");
+
+    const markFontsLoaded = () => {
+      if (body) body.setAttribute("data-wf-loaded", "true");
+    };
 
     async function loadFont(family: string, weights: string[]) {
       const font = webFontMap.get(family);
@@ -75,16 +77,21 @@ export function useWebfonts(typography: z.infer<typeof typographySchema>) {
       addFontLoadPlan(fallbackFamily, headingTypography.fontWeights);
     }
 
+    const fontLoadPlans = Array.from(fontWeightsByFamily.entries());
+
+    if (fontLoadPlans.length === 0) {
+      markFontsLoaded();
+      return () => {
+        if (isMounted() && body) body.removeAttribute("data-wf-loaded");
+      };
+    }
+
     void Promise.all(
-      Array.from(fontWeightsByFamily.entries()).map(([family, weights]) => loadFont(family, Array.from(weights))),
-    ).then(() => {
-      if (isMounted() && body) body.setAttribute("data-wf-loaded", "true");
-    });
+      fontLoadPlans.map(([family, weights]) => loadFont(family, Array.from(weights))),
+    ).finally(markFontsLoaded);
 
     return () => {
-      if (isMounted()) {
-        if (body) body.removeAttribute("data-wf-loaded");
-      }
+      if (isMounted() && body) body.removeAttribute("data-wf-loaded");
     };
   }, [isMounted, typography]);
 }

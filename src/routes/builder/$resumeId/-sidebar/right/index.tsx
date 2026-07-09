@@ -53,9 +53,9 @@ export function BuilderSidebarRight() {
 
       <ScrollArea
         ref={scrollAreaRef}
-        className="@container h-[calc(100svh-3.5rem)] overflow-hidden bg-background sm:me-12"
+        className="@container h-[calc(100svh-3.5rem)] overflow-hidden sm:me-12"
       >
-        <div className="space-y-4 p-4">
+        <div className="space-y-3 p-3 sm:space-y-4 sm:p-4">
           {rightSidebarSections.map((section) => (
             <Fragment key={section}>
               {getSectionComponent(section)}

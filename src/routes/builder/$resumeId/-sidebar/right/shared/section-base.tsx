@@ -17,12 +17,15 @@ export function SectionBase({ type, className, ...props }: Props) {
 
   return (
     <Accordion
-      className="space-y-4"
+      className="space-y-3"
       id={`sidebar-${type}`}
       value={collapsed ? [] : [type]}
       onValueChange={() => toggleCollapsed(type)}
     >
-      <AccordionItem value={type} className="group/accordion-item space-y-4">
+      <AccordionItem
+        value={type}
+        className="group/accordion-item space-y-3 rounded-xl border border-border/70 bg-card/80 p-3 shadow-sm"
+      >
         <div className="flex items-center">
           <AccordionTrigger
             className="me-2 items-center justify-center"

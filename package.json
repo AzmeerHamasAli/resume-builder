@@ -20,7 +20,7 @@
     "db:pull": "drizzle-kit pull",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "dev": "vp dev",
+    "dev": "node api.js && vp dev",
     "docs:dev": "cd docs && npx mint dev",
     "email:dev": "email dev --dir src/integrations/email/templates --port 3001",
     "format": "vp fmt --check",
@@ -30,7 +30,7 @@
     "lint": "vp lint --type-aware",
     "lint:fix": "vp lint --type-aware --fix",
     "preview": "vp preview",
-    "start": "node .output/server/index.mjs",
+    "start": "node api.js && node .output/server/index.mjs",
     "test": "vp test",
     "test:coverage": "vp test --coverage --run",
     "typecheck": "tsgo --noEmit"

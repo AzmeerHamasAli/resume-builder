@@ -21,20 +21,24 @@ const getResumeForPrinterFn = createServerFn({ method: "GET" })
     return resumeService.getByIdForPrinter({ id: data.id, printerToken: data.token });
   });
 
-function assertValidPrinterToken(token: string, resumeId: string): void {
-  const tokenResumeId = verifyPrinterToken(token);
-  if (tokenResumeId === resumeId) return;
-  throw new Error("Printer token does not match resume ID");
-}
+/** Server-only: verifyPrinterToken must not run in the browser during hydration. */
+const validatePrinterRouteAccessFn = createServerFn({ method: "GET" })
+  .inputValidator(z.object({ resumeId: z.string(), token: z.string() }))
+  .handler(({ data }) => {
+    if (env.FLAG_DEBUG_PRINTER) return;
 
-export const Route = createFileRoute("/printer/$resumeId")({
+    const tokenResumeId = verifyPrinterToken(data.token);
+    if (tokenResumeId !== data.resumeId) throw new Error("Printer token does not match resume ID");
+  });
+
+export const Route = createFileRoute("/internal/printer/$resumeId")({
   component: RouteComponent,
   validateSearch: zodValidator(searchSchema),
   beforeLoad: async ({ params, search }) => {
-    if (env.FLAG_DEBUG_PRINTER) return;
-
     try {
-      assertValidPrinterToken(search.token, params.resumeId);
+      await validatePrinterRouteAccessFn({
+        data: { resumeId: params.resumeId, token: search.token },
+      });
     } catch {
       throw redirect({ to: "/", search: {}, throw: true });
     }
@@ -61,6 +65,12 @@ function RouteComponent() {
     initialize(resume);
     return () => initialize(null);
   }, [resume, initialize]);
+
+  useEffect(() => {
+    if (!isReady) return;
+
+    document.body.setAttribute("data-printer-ready", "true");
+  }, [isReady]);
 
   if (!isReady) return <LoadingScreen />;
 

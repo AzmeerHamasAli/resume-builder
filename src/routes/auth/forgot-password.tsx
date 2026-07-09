@@ -63,7 +63,7 @@ function RouteComponent() {
   if (submitted) return <PostForgotPasswordScreen />;
 
   return (
-    <>
+    <div className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm sm:p-8">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-bold tracking-tight">
           <Trans>Forgot your password?</Trans>
@@ -120,13 +120,13 @@ function RouteComponent() {
           </Button>
         </form>
       </Form>
-    </>
+    </div>
   );
 }
 
 function PostForgotPasswordScreen() {
   return (
-    <>
+    <div className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm sm:p-8">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-bold tracking-tight">
           <Trans>You've got mail!</Trans>
@@ -144,6 +144,6 @@ function PostForgotPasswordScreen() {
           </a>
         }
       />
-    </>
+    </div>
   );
 }

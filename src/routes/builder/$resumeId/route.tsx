@@ -14,6 +14,7 @@ import { useResumeStore } from "@/components/resume/store/resume";
 import { ResizableGroup, ResizablePanel, ResizableSeparator } from "@/components/ui/resizable";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { orpc } from "@/integrations/orpc/client";
+import { pageTitle } from "@/utils/brand";
 
 import { BuilderHeader } from "./-components/header";
 import { BuilderSidebarLeft } from "./-sidebar/left";
@@ -43,7 +44,7 @@ export const Route = createFileRoute("/builder/$resumeId")({
     return { layout, name: resume.name };
   },
   head: ({ loaderData }) => ({
-    meta: loaderData ? [{ title: `${loaderData.name} - Reactive Resume` }] : undefined,
+    meta: loaderData ? [{ title: pageTitle(loaderData.name) }] : undefined,
   }),
 });
 
@@ -125,12 +126,12 @@ function BuilderLayout({ initialLayout, ...props }: BuilderLayoutProps) {
           minSize={sidebarMinSize}
           collapsedSize={sidebarCollapsedSize}
           defaultSize={leftSidebarSize}
-          className="z-20 h-[calc(100svh-3.5rem)]"
+          className="z-20 h-[calc(100svh-3.5rem)] border-e border-border/60 bg-builder-rail"
         >
           <BuilderSidebarLeft />
         </ResizablePanel>
         <ResizableSeparator withHandle className="z-50 border-s" />
-        <ResizablePanel id="artboard" defaultSize={artboardSize} className="h-[calc(100svh-3.5rem)]">
+        <ResizablePanel id="artboard" defaultSize={artboardSize} className="builder-canvas-grid h-[calc(100svh-3.5rem)]">
           <Outlet />
         </ResizablePanel>
         <ResizableSeparator withHandle className="z-50 border-e" />
@@ -142,7 +143,7 @@ function BuilderLayout({ initialLayout, ...props }: BuilderLayoutProps) {
           minSize={sidebarMinSize}
           collapsedSize={sidebarCollapsedSize}
           defaultSize={rightSidebarSize}
-          className="z-20 h-[calc(100svh-3.5rem)]"
+          className="z-20 h-[calc(100svh-3.5rem)] border-s border-border/60 bg-builder-rail"
         >
           <BuilderSidebarRight />
         </ResizablePanel>

@@ -1,24 +1,19 @@
+import { FileTextIcon } from "@phosphor-icons/react";
+
 import { cn } from "@/utils/style";
 
-type Props = React.ComponentProps<"img"> & {
+type Props = React.ComponentProps<typeof FileTextIcon> & {
+  /** @deprecated Logo variants are no longer used; kept for call-site compatibility. */
   variant?: "logo" | "icon";
 };
 
-export function BrandIcon({ variant = "logo", className, ...props }: Props) {
+export function BrandIcon({ className, weight = "duotone", variant: _variant, ...props }: Props) {
   return (
-    <>
-      <img
-        src={`/${variant}/dark.svg`}
-        alt="Reactive Resume"
-        className={cn("hidden size-12 dark:block", className)}
-        {...props}
-      />
-      <img
-        src={`/${variant}/light.svg`}
-        alt="Reactive Resume"
-        className={cn("block size-12 dark:hidden", className)}
-        {...props}
-      />
-    </>
+    <FileTextIcon
+      weight={weight}
+      aria-hidden
+      className={cn("size-12 shrink-0 text-primary", className)}
+      {...props}
+    />
   );
 }

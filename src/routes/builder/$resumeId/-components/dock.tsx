@@ -111,7 +111,7 @@ export function BuilderDock() {
         animate={{ opacity: 0.6, y: 0 }}
         whileHover={{ opacity: 1, y: -2, scale: 1.01 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
-        className="flex items-center rounded-l-full rounded-r-full bg-popover px-2 shadow-xl will-change-[transform,opacity]"
+        className="flex items-center rounded-full border border-border/80 bg-card/95 px-2 shadow-lg backdrop-blur-md will-change-[transform,opacity] ring-1 ring-primary/10"
       >
         <DockIcon
           disabled={!canUndo}

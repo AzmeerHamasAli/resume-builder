@@ -1,6 +1,5 @@
 import type { Icon as IconType } from "@phosphor-icons/react";
 
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn } from "@/utils/style";
 
 type Props = {
@@ -11,10 +10,11 @@ type Props = {
 
 export function DashboardHeader({ title, icon: IconComponent, className }: Props) {
   return (
-    <div className={cn("relative flex items-center justify-center gap-x-2.5 md:justify-start", className)}>
-      <SidebarTrigger className="absolute inset-s-0 md:hidden" />
-      <IconComponent weight="light" className="size-5" />
-      <h1 className="text-xl font-medium tracking-tight">{title}</h1>
+    <div className={cn("flex items-center gap-3", className)}>
+      <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <IconComponent weight="duotone" className="size-5" />
+      </div>
+      <h1 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h1>
     </div>
   );
 }

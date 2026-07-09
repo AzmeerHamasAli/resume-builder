@@ -183,7 +183,7 @@ export function registerTools(server: McpServer) {
       title: "Get Resume Analysis",
       description: [
         "Returns the latest saved AI analysis for a resume (scorecard, strengths, suggestions), if any.",
-        "Analyses are created from the Reactive Resume web app AI flow, not from MCP.",
+        "Analyses are created from the the web app web app AI flow, not from MCP.",
         `Returns JSON or a short message if none exists. Use \`${T.listResumes}\` to find resume IDs.`,
       ].join("\n"),
       inputSchema: z.object({ id: resumeIdSchema }),
@@ -254,7 +254,7 @@ export function registerTools(server: McpServer) {
     {
       title: "Import Resume",
       description: [
-        "Create a new resume from a full ResumeData JSON object (e.g. an exported file from Reactive Resume).",
+        "Create a new resume from a full ResumeData JSON object (e.g. an exported file from the web app).",
         "A random name and slug are assigned automatically, like the web importer.",
         `For small edits to an existing resume, prefer \`${T.patchResume}\` instead of re-importing.`,
         "Large payloads may exceed MCP client message limits — in that case, use the web UI or the HTTP API.",

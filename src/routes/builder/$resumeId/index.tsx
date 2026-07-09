@@ -39,7 +39,7 @@ function RouteComponent() {
           <ResumePreview
             showPageNumbers
             className="flex items-start space-y-10 space-x-10"
-            pageClassName="shadow-xl rounded-md overflow-hidden"
+            pageClassName="overflow-hidden rounded-lg shadow-2xl ring-1 ring-border/80"
           />
         </TransformComponent>
 

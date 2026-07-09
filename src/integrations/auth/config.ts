@@ -15,6 +15,7 @@ import { username } from "better-auth/plugins/username";
 import { eq, or } from "drizzle-orm";
 import { createElement } from "react";
 
+import { APP_NAME } from "@/utils/brand";
 import { env } from "@/utils/env";
 import { hashPassword, verifyPassword } from "@/utils/password";
 import { generateId, toUsername } from "@/utils/string";
@@ -232,7 +233,7 @@ const getAuthConfig = () => {
   }
 
   return betterAuth({
-    appName: "Reactive Resume",
+    appName: APP_NAME,
     baseURL: authBaseUrl,
     secret: process.env.BETTER_AUTH_SECRET ?? env.AUTH_SECRET,
 
@@ -384,7 +385,7 @@ const getAuthConfig = () => {
       admin(),
       passkey(),
       genericOAuth({ config: authConfigs }),
-      twoFactor({ issuer: "Reactive Resume" }),
+      twoFactor({ issuer: APP_NAME }),
       apiKey({ enableSessionForAPIKeys: true, rateLimit: { enabled: true } }),
       dash({ apiKey: env.BETTER_AUTH_API_KEY, activityTracking: { enabled: true } }),
       oauthProvider({

@@ -12,6 +12,7 @@ import { useToggle } from "usehooks-ts";
 import z from "zod";
 
 import { Button } from "@/components/ui/button";
+import { APP_NAME } from "@/utils/brand";
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -73,7 +74,7 @@ export function EnableTwoFactorDialog(_: DialogProps<"auth.two-factor.enable">) 
 
     const { data, error } = await authClient.twoFactor.enable({
       password: values.password,
-      issuer: "Reactive Resume",
+      issuer: APP_NAME,
     });
 
     if (error) {
@@ -159,7 +160,7 @@ export function EnableTwoFactorDialog(_: DialogProps<"auth.two-factor.enable">) 
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "reactive-resume_backup-codes.txt";
+    a.download = "resume-builder_backup-codes.txt";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

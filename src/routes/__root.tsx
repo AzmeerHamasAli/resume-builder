@@ -21,6 +21,7 @@ import { ConfirmDialogProvider } from "@/hooks/use-confirm";
 import { PromptDialogProvider } from "@/hooks/use-prompt";
 import { getSession } from "@/integrations/auth/functions";
 import { client, type orpc } from "@/integrations/orpc/client";
+import { APP_DESCRIPTION, APP_NAME, pageTitle } from "@/utils/brand";
 import { getLocale, isRTL, type Locale, loadLocale } from "@/utils/locale";
 import { getTheme, type Theme } from "@/utils/theme";
 
@@ -35,18 +36,15 @@ type RouterContext = {
   flags: FeatureFlags;
 };
 
-const appName = "Reactive Resume";
-const tagline = "A free and open-source resume builder";
-const title = `${appName} — ${tagline}`;
-const description =
-  "Reactive Resume is a free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.";
+const title = pageTitle();
+const description = APP_DESCRIPTION;
 
 await loadLocale(await getLocale());
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   shellComponent: RootDocument,
   head: () => {
-    const appUrl = process.env.APP_URL ?? "https://rxresu.me/";
+    const appUrl = process.env.APP_URL ?? "http://localhost:3000/";
 
     return {
       links: [
@@ -70,7 +68,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
         { property: "twitter:description", content: description },
         // OpenGraph Tags
         { property: "og:image", content: `${appUrl}/opengraph/banner.jpg` },
-        { property: "og:site_name", content: appName },
+        { property: "og:site_name", content: APP_NAME },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:url", content: appUrl },

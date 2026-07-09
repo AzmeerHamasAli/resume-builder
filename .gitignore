@@ -1,5 +1,4 @@
 dist
-.env*
 /data
 .nitro
 .agents
@@ -19,3 +18,4 @@ public/sw.js.map
 scripts/**/*.json
 public/workbox-*.js
 public/workbox-*.js.map
+config.bat

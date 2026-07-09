@@ -8,6 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import router from "@/integrations/orpc/router";
 import { resumeDataSchema } from "@/schema/resume/data";
+import { APP_DESCRIPTION, APP_NAME } from "@/utils/brand";
 import { env } from "@/utils/env";
 import { getLocale } from "@/utils/locale";
 
@@ -37,14 +38,11 @@ async function handler({ request }: { request: Request }) {
   if (request.method === "GET" && request.url.endsWith("/spec.json")) {
     const spec = await openAPIGenerator.generate(router, {
       info: {
-        title: "Reactive Resume",
+        title: APP_NAME,
         version: __APP_VERSION__,
-        description: "Reactive Resume API",
-        license: { name: "MIT", url: "https://github.com/amruthpillai/reactive-resume/blob/main/LICENSE" },
-        contact: { name: "Amruth Pillai", email: "hello@amruthpillai.com", url: "https://amruthpillai.com" },
+        description: `${APP_NAME} API — ${APP_DESCRIPTION}`,
       },
       servers: [{ url: `${env.APP_URL}/api/openapi` }],
-      externalDocs: { url: "https://docs.rxresu.me", description: "Reactive Resume Documentation" },
       commonSchemas: {
         ResumeData: { schema: resumeDataSchema },
       },

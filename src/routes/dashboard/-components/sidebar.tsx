@@ -7,7 +7,6 @@ import {
   BrainIcon,
   BriefcaseIcon,
   GearSixIcon,
-  KeyIcon,
   ReadCvLogoIcon,
   ShieldCheckIcon,
   UserCircleIcon,
@@ -18,6 +17,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BrandIcon } from "@/components/ui/brand-icon";
+import { APP_NAME } from "@/utils/brand";
 import { Copyright } from "@/components/ui/copyright";
 import {
   Sidebar,
@@ -73,11 +73,6 @@ const settingsSidebarItems = [
     href: "/dashboard/settings/authentication",
   },
   {
-    icon: <KeyIcon />,
-    label: msg`API Keys`,
-    href: "/dashboard/settings/api-keys",
-  },
-  {
     icon: <BrainIcon />,
     label: msg`Integrations`,
     href: "/dashboard/settings/integrations",
@@ -130,7 +125,7 @@ export function DashboardSidebar() {
               render={
                 <Link to="/">
                   <BrandIcon variant="icon" className="size-6" />
-                  <h1 className="sr-only">Reactive Resume</h1>
+                  <h1 className="sr-only">{APP_NAME}</h1>
                 </Link>
               }
             />

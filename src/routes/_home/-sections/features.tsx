@@ -44,7 +44,7 @@ const getFeatures = (): Feature[] => [
     id: "open-source",
     icon: GithubLogoIcon,
     title: t`Open Source`,
-    description: t`By the community, for the community.`,
+    description: t`Built with modern open-source tools and community contributions.`,
   },
   {
     id: "no-ads",

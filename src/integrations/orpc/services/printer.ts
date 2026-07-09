@@ -116,7 +116,7 @@ async function doPrintResumeAsPDF(
 
   // Generate a secure token to authenticate the printer request
   const token = generatePrinterToken(id);
-  const url = `${baseUrl}/printer/${id}?token=${token}`;
+  const url = `${baseUrl}/internal/printer/${id}?token=${token}`;
 
   // Step 3: Calculate print paddings for templates that disable CSS padding in print mode.
   // We render these margins inside the page (not via Puppeteer's PDF margins), so the margin
@@ -187,7 +187,12 @@ async function doPrintResumeAsPDF(
         ),
       );
     await page
-      .waitForFunction(() => document.body.getAttribute("data-wf-loaded") === "true", { timeout: 5_000 })
+      .waitForFunction(
+        () =>
+          document.body.getAttribute("data-printer-ready") === "true" ||
+          document.body.getAttribute("data-wf-loaded") === "true",
+        { timeout: 15_000 },
+      )
       .catch((error) =>
         throwPrinterStepError(
           "Resume print page did not finish loading",
@@ -468,7 +473,7 @@ async function doGetResumeScreenshot(
   const locale = data.metadata.page.locale;
 
   const token = generatePrinterToken(id);
-  const url = `${baseUrl}/printer/${id}?token=${token}`;
+  const url = `${baseUrl}/internal/printer/${id}?token=${token}`;
 
   let context: BrowserContext | null = null;
   let page: Page | null = null;
@@ -522,7 +527,12 @@ async function doGetResumeScreenshot(
         ),
       );
     await page
-      .waitForFunction(() => document.body.getAttribute("data-wf-loaded") === "true", { timeout: 5_000 })
+      .waitForFunction(
+        () =>
+          document.body.getAttribute("data-printer-ready") === "true" ||
+          document.body.getAttribute("data-wf-loaded") === "true",
+        { timeout: 15_000 },
+      )
       .catch((error) =>
         throwPrinterStepError(
           "Resume screenshot page did not finish loading",

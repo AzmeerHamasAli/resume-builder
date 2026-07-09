@@ -3,6 +3,8 @@ import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/
 import { createFileRoute } from "@tanstack/react-router";
 
 import { auth, authBaseUrl, verifyOAuthToken } from "@/integrations/auth/config";
+import { APP_DESCRIPTION, APP_NAME } from "@/utils/brand";
+import { env } from "@/utils/env";
 
 import { registerPrompts } from "./-helpers/prompts";
 import { registerResources } from "./-helpers/resources";
@@ -11,28 +13,15 @@ import { registerTools } from "./-helpers/tools";
 function createMcpServer() {
   const server = new McpServer(
     {
-      name: "reactive-resume",
+      name: "resume-builder",
       version: __APP_VERSION__,
-      title: "Reactive Resume",
-      websiteUrl: "https://rxresu.me",
-      description:
-        "Reactive Resume is a free and open-source resume builder. Use this MCP server to interact with your resume using an LLM of your choice.",
-      icons: [
-        {
-          src: "https://rxresu.me/icon/light.svg",
-          mimeType: "image/svg+xml",
-          theme: "light",
-        },
-        {
-          src: "https://rxresu.me/icon/dark.svg",
-          mimeType: "image/svg+xml",
-          theme: "dark",
-        },
-      ],
+      title: APP_NAME,
+      websiteUrl: env.APP_URL,
+      description: `${APP_DESCRIPTION} Use this MCP server to manage resumes with an LLM.`,
     },
     {
       instructions: [
-        "You are connected to Reactive Resume over MCP.",
+        `You are connected to ${APP_NAME} over MCP.`,
         "Authenticate with OAuth (recommended) or an API key (`x-api-key`).",
         "Discover resume IDs with `reactive_resume_list_resumes` (not `resources/list`).",
         "List distinct tags with `reactive_resume_list_resume_tags`.",

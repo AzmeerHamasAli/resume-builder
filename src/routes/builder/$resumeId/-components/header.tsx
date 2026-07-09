@@ -36,7 +36,7 @@ export function BuilderHeader() {
   const toggleSidebar = useBuilderSidebar((state) => state.toggleSidebar);
 
   return (
-    <div className="absolute inset-x-0 top-0 z-10 flex h-14 items-center justify-between border-b bg-popover px-1.5">
+    <header className="absolute inset-x-0 top-0 z-10 flex h-14 items-center justify-between border-b border-primary/15 bg-builder-header px-2 shadow-sm backdrop-blur-md sm:px-3">
       <Button size="icon" variant="ghost" onClick={() => toggleSidebar("left")}>
         <SidebarSimpleIcon />
         <span className="sr-only">
@@ -61,8 +61,8 @@ export function BuilderHeader() {
             </Link>
           }
         />
-        <span className="me-2.5 text-muted-foreground">/</span>
-        <h2 className="flex-1 truncate font-medium">{name}</h2>
+        <span className="me-2 text-muted-foreground/70">/</span>
+        <h2 className="flex-1 truncate text-sm font-semibold tracking-tight text-foreground sm:text-base">{name}</h2>
         {isLocked && <LockSimpleIcon className="ms-2 text-muted-foreground" />}
         <BuilderHeaderDropdown />
       </div>
@@ -75,7 +75,7 @@ export function BuilderHeader() {
           </Trans>
         </span>
       </Button>
-    </div>
+    </header>
   );
 }
 

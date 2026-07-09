@@ -17,7 +17,6 @@ import { Route as McpIndexRouteImport } from "./routes/mcp/index";
 import { Route as DashboardIndexRouteImport } from "./routes/dashboard/index";
 import { Route as AuthIndexRouteImport } from "./routes/auth/index";
 import { Route as HomeIndexRouteImport } from "./routes/_home/index";
-import { Route as PrinterResumeIdRouteImport } from "./routes/printer/$resumeId";
 import { Route as AuthVerify2faBackupRouteImport } from "./routes/auth/verify-2fa-backup";
 import { Route as AuthVerify2faRouteImport } from "./routes/auth/verify-2fa";
 import { Route as AuthResumePasswordRouteImport } from "./routes/auth/resume-password";
@@ -37,11 +36,11 @@ import { Route as DashboardResumesIndexRouteImport } from "./routes/dashboard/re
 import { Route as DashboardJobSearchIndexRouteImport } from "./routes/dashboard/job-search/index";
 import { Route as BuilderResumeIdIndexRouteImport } from "./routes/builder/$resumeId/index";
 import { Route as UploadsUserIdSplatRouteImport } from "./routes/uploads/$userId.$";
+import { Route as InternalPrinterResumeIdRouteImport } from "./routes/internal/printer/$resumeId";
 import { Route as DashboardSettingsProfileRouteImport } from "./routes/dashboard/settings/profile";
 import { Route as DashboardSettingsPreferencesRouteImport } from "./routes/dashboard/settings/preferences";
 import { Route as DashboardSettingsJobSearchRouteImport } from "./routes/dashboard/settings/job-search";
 import { Route as DashboardSettingsDangerZoneRouteImport } from "./routes/dashboard/settings/danger-zone";
-import { Route as DashboardSettingsApiKeysRouteImport } from "./routes/dashboard/settings/api-keys";
 import { Route as DashboardSettingsAiRouteImport } from "./routes/dashboard/settings/ai";
 import { Route as ApiRpcSplatRouteImport } from "./routes/api/rpc.$";
 import { Route as ApiOpenapiSplatRouteImport } from "./routes/api/openapi.$";
@@ -90,11 +89,6 @@ const HomeIndexRoute = HomeIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => HomeRouteRoute,
-} as any);
-const PrinterResumeIdRoute = PrinterResumeIdRouteImport.update({
-  id: "/printer/$resumeId",
-  path: "/printer/$resumeId",
-  getParentRoute: () => rootRouteImport,
 } as any);
 const AuthVerify2faBackupRoute = AuthVerify2faBackupRouteImport.update({
   id: "/verify-2fa-backup",
@@ -194,6 +188,11 @@ const UploadsUserIdSplatRoute = UploadsUserIdSplatRouteImport.update({
   path: "/uploads/$userId/$",
   getParentRoute: () => rootRouteImport,
 } as any);
+const InternalPrinterResumeIdRoute = InternalPrinterResumeIdRouteImport.update({
+  id: "/internal/printer/$resumeId",
+  path: "/internal/printer/$resumeId",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const DashboardSettingsProfileRoute =
   DashboardSettingsProfileRouteImport.update({
     id: "/settings/profile",
@@ -216,12 +215,6 @@ const DashboardSettingsDangerZoneRoute =
   DashboardSettingsDangerZoneRouteImport.update({
     id: "/settings/danger-zone",
     path: "/settings/danger-zone",
-    getParentRoute: () => DashboardRouteRoute,
-  } as any);
-const DashboardSettingsApiKeysRoute =
-  DashboardSettingsApiKeysRouteImport.update({
-    id: "/settings/api-keys",
-    path: "/settings/api-keys",
     getParentRoute: () => DashboardRouteRoute,
   } as any);
 const DashboardSettingsAiRoute = DashboardSettingsAiRouteImport.update({
@@ -295,7 +288,6 @@ export interface FileRoutesByFullPath {
   "/auth/resume-password": typeof AuthResumePasswordRoute;
   "/auth/verify-2fa": typeof AuthVerify2faRoute;
   "/auth/verify-2fa-backup": typeof AuthVerify2faBackupRoute;
-  "/printer/$resumeId": typeof PrinterResumeIdRoute;
   "/auth/": typeof AuthIndexRoute;
   "/dashboard/": typeof DashboardIndexRoute;
   "/mcp/": typeof McpIndexRoute;
@@ -307,11 +299,11 @@ export interface FileRoutesByFullPath {
   "/api/openapi/$": typeof ApiOpenapiSplatRoute;
   "/api/rpc/$": typeof ApiRpcSplatRoute;
   "/dashboard/settings/ai": typeof DashboardSettingsAiRoute;
-  "/dashboard/settings/api-keys": typeof DashboardSettingsApiKeysRoute;
   "/dashboard/settings/danger-zone": typeof DashboardSettingsDangerZoneRoute;
   "/dashboard/settings/job-search": typeof DashboardSettingsJobSearchRoute;
   "/dashboard/settings/preferences": typeof DashboardSettingsPreferencesRoute;
   "/dashboard/settings/profile": typeof DashboardSettingsProfileRoute;
+  "/internal/printer/$resumeId": typeof InternalPrinterResumeIdRoute;
   "/uploads/$userId/$": typeof UploadsUserIdSplatRoute;
   "/builder/$resumeId/": typeof BuilderResumeIdIndexRoute;
   "/dashboard/job-search/": typeof DashboardJobSearchIndexRoute;
@@ -334,7 +326,6 @@ export interface FileRoutesByTo {
   "/auth/resume-password": typeof AuthResumePasswordRoute;
   "/auth/verify-2fa": typeof AuthVerify2faRoute;
   "/auth/verify-2fa-backup": typeof AuthVerify2faBackupRoute;
-  "/printer/$resumeId": typeof PrinterResumeIdRoute;
   "/": typeof HomeIndexRoute;
   "/auth": typeof AuthIndexRoute;
   "/dashboard": typeof DashboardIndexRoute;
@@ -347,11 +338,11 @@ export interface FileRoutesByTo {
   "/api/openapi/$": typeof ApiOpenapiSplatRoute;
   "/api/rpc/$": typeof ApiRpcSplatRoute;
   "/dashboard/settings/ai": typeof DashboardSettingsAiRoute;
-  "/dashboard/settings/api-keys": typeof DashboardSettingsApiKeysRoute;
   "/dashboard/settings/danger-zone": typeof DashboardSettingsDangerZoneRoute;
   "/dashboard/settings/job-search": typeof DashboardSettingsJobSearchRoute;
   "/dashboard/settings/preferences": typeof DashboardSettingsPreferencesRoute;
   "/dashboard/settings/profile": typeof DashboardSettingsProfileRoute;
+  "/internal/printer/$resumeId": typeof InternalPrinterResumeIdRoute;
   "/uploads/$userId/$": typeof UploadsUserIdSplatRoute;
   "/builder/$resumeId": typeof BuilderResumeIdIndexRoute;
   "/dashboard/job-search": typeof DashboardJobSearchIndexRoute;
@@ -379,7 +370,6 @@ export interface FileRoutesById {
   "/auth/resume-password": typeof AuthResumePasswordRoute;
   "/auth/verify-2fa": typeof AuthVerify2faRoute;
   "/auth/verify-2fa-backup": typeof AuthVerify2faBackupRoute;
-  "/printer/$resumeId": typeof PrinterResumeIdRoute;
   "/_home/": typeof HomeIndexRoute;
   "/auth/": typeof AuthIndexRoute;
   "/dashboard/": typeof DashboardIndexRoute;
@@ -392,11 +382,11 @@ export interface FileRoutesById {
   "/api/openapi/$": typeof ApiOpenapiSplatRoute;
   "/api/rpc/$": typeof ApiRpcSplatRoute;
   "/dashboard/settings/ai": typeof DashboardSettingsAiRoute;
-  "/dashboard/settings/api-keys": typeof DashboardSettingsApiKeysRoute;
   "/dashboard/settings/danger-zone": typeof DashboardSettingsDangerZoneRoute;
   "/dashboard/settings/job-search": typeof DashboardSettingsJobSearchRoute;
   "/dashboard/settings/preferences": typeof DashboardSettingsPreferencesRoute;
   "/dashboard/settings/profile": typeof DashboardSettingsProfileRoute;
+  "/internal/printer/$resumeId": typeof InternalPrinterResumeIdRoute;
   "/uploads/$userId/$": typeof UploadsUserIdSplatRoute;
   "/builder/$resumeId/": typeof BuilderResumeIdIndexRoute;
   "/dashboard/job-search/": typeof DashboardJobSearchIndexRoute;
@@ -425,7 +415,6 @@ export interface FileRouteTypes {
     | "/auth/resume-password"
     | "/auth/verify-2fa"
     | "/auth/verify-2fa-backup"
-    | "/printer/$resumeId"
     | "/auth/"
     | "/dashboard/"
     | "/mcp/"
@@ -437,11 +426,11 @@ export interface FileRouteTypes {
     | "/api/openapi/$"
     | "/api/rpc/$"
     | "/dashboard/settings/ai"
-    | "/dashboard/settings/api-keys"
     | "/dashboard/settings/danger-zone"
     | "/dashboard/settings/job-search"
     | "/dashboard/settings/preferences"
     | "/dashboard/settings/profile"
+    | "/internal/printer/$resumeId"
     | "/uploads/$userId/$"
     | "/builder/$resumeId/"
     | "/dashboard/job-search/"
@@ -464,7 +453,6 @@ export interface FileRouteTypes {
     | "/auth/resume-password"
     | "/auth/verify-2fa"
     | "/auth/verify-2fa-backup"
-    | "/printer/$resumeId"
     | "/"
     | "/auth"
     | "/dashboard"
@@ -477,11 +465,11 @@ export interface FileRouteTypes {
     | "/api/openapi/$"
     | "/api/rpc/$"
     | "/dashboard/settings/ai"
-    | "/dashboard/settings/api-keys"
     | "/dashboard/settings/danger-zone"
     | "/dashboard/settings/job-search"
     | "/dashboard/settings/preferences"
     | "/dashboard/settings/profile"
+    | "/internal/printer/$resumeId"
     | "/uploads/$userId/$"
     | "/builder/$resumeId"
     | "/dashboard/job-search"
@@ -508,7 +496,6 @@ export interface FileRouteTypes {
     | "/auth/resume-password"
     | "/auth/verify-2fa"
     | "/auth/verify-2fa-backup"
-    | "/printer/$resumeId"
     | "/_home/"
     | "/auth/"
     | "/dashboard/"
@@ -521,11 +508,11 @@ export interface FileRouteTypes {
     | "/api/openapi/$"
     | "/api/rpc/$"
     | "/dashboard/settings/ai"
-    | "/dashboard/settings/api-keys"
     | "/dashboard/settings/danger-zone"
     | "/dashboard/settings/job-search"
     | "/dashboard/settings/preferences"
     | "/dashboard/settings/profile"
+    | "/internal/printer/$resumeId"
     | "/uploads/$userId/$"
     | "/builder/$resumeId/"
     | "/dashboard/job-search/"
@@ -545,12 +532,12 @@ export interface RootRouteChildren {
   DotwellKnownOauthProtectedResourceRoute: typeof DotwellKnownOauthProtectedResourceRouteWithChildren;
   DotwellKnownOpenidConfigurationRoute: typeof DotwellKnownOpenidConfigurationRoute;
   ApiHealthRoute: typeof ApiHealthRoute;
-  PrinterResumeIdRoute: typeof PrinterResumeIdRoute;
   McpIndexRoute: typeof McpIndexRoute;
   DotwellKnownMcpServerCardDotjsonRoute: typeof DotwellKnownMcpServerCardDotjsonRoute;
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute;
   ApiOpenapiSplatRoute: typeof ApiOpenapiSplatRoute;
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute;
+  InternalPrinterResumeIdRoute: typeof InternalPrinterResumeIdRoute;
   UploadsUserIdSplatRoute: typeof UploadsUserIdSplatRoute;
 }
 
@@ -611,13 +598,6 @@ declare module "@tanstack/react-router" {
       fullPath: "/";
       preLoaderRoute: typeof HomeIndexRouteImport;
       parentRoute: typeof HomeRouteRoute;
-    };
-    "/printer/$resumeId": {
-      id: "/printer/$resumeId";
-      path: "/printer/$resumeId";
-      fullPath: "/printer/$resumeId";
-      preLoaderRoute: typeof PrinterResumeIdRouteImport;
-      parentRoute: typeof rootRouteImport;
     };
     "/auth/verify-2fa-backup": {
       id: "/auth/verify-2fa-backup";
@@ -752,6 +732,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof UploadsUserIdSplatRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    "/internal/printer/$resumeId": {
+      id: "/internal/printer/$resumeId";
+      path: "/internal/printer/$resumeId";
+      fullPath: "/internal/printer/$resumeId";
+      preLoaderRoute: typeof InternalPrinterResumeIdRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     "/dashboard/settings/profile": {
       id: "/dashboard/settings/profile";
       path: "/settings/profile";
@@ -778,13 +765,6 @@ declare module "@tanstack/react-router" {
       path: "/settings/danger-zone";
       fullPath: "/dashboard/settings/danger-zone";
       preLoaderRoute: typeof DashboardSettingsDangerZoneRouteImport;
-      parentRoute: typeof DashboardRouteRoute;
-    };
-    "/dashboard/settings/api-keys": {
-      id: "/dashboard/settings/api-keys";
-      path: "/settings/api-keys";
-      fullPath: "/dashboard/settings/api-keys";
-      preLoaderRoute: typeof DashboardSettingsApiKeysRouteImport;
       parentRoute: typeof DashboardRouteRoute;
     };
     "/dashboard/settings/ai": {
@@ -897,7 +877,6 @@ interface DashboardRouteRouteChildren {
   DashboardIndexRoute: typeof DashboardIndexRoute;
   DashboardSettingsIntegrationsRouteRoute: typeof DashboardSettingsIntegrationsRouteRoute;
   DashboardSettingsAiRoute: typeof DashboardSettingsAiRoute;
-  DashboardSettingsApiKeysRoute: typeof DashboardSettingsApiKeysRoute;
   DashboardSettingsDangerZoneRoute: typeof DashboardSettingsDangerZoneRoute;
   DashboardSettingsJobSearchRoute: typeof DashboardSettingsJobSearchRoute;
   DashboardSettingsPreferencesRoute: typeof DashboardSettingsPreferencesRoute;
@@ -912,7 +891,6 @@ const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardSettingsIntegrationsRouteRoute:
     DashboardSettingsIntegrationsRouteRoute,
   DashboardSettingsAiRoute: DashboardSettingsAiRoute,
-  DashboardSettingsApiKeysRoute: DashboardSettingsApiKeysRoute,
   DashboardSettingsDangerZoneRoute: DashboardSettingsDangerZoneRoute,
   DashboardSettingsJobSearchRoute: DashboardSettingsJobSearchRoute,
   DashboardSettingsPreferencesRoute: DashboardSettingsPreferencesRoute,
@@ -982,12 +960,12 @@ const rootRouteChildren: RootRouteChildren = {
     DotwellKnownOauthProtectedResourceRouteWithChildren,
   DotwellKnownOpenidConfigurationRoute: DotwellKnownOpenidConfigurationRoute,
   ApiHealthRoute: ApiHealthRoute,
-  PrinterResumeIdRoute: PrinterResumeIdRoute,
   McpIndexRoute: McpIndexRoute,
   DotwellKnownMcpServerCardDotjsonRoute: DotwellKnownMcpServerCardDotjsonRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiOpenapiSplatRoute: ApiOpenapiSplatRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
+  InternalPrinterResumeIdRoute: InternalPrinterResumeIdRoute,
   UploadsUserIdSplatRoute: UploadsUserIdSplatRoute,
 };
 export const routeTree = rootRouteImport

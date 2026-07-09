@@ -7,7 +7,6 @@ import {
   Heading,
   Hr,
   Html,
-  Img,
   Link,
   Preview,
   Section,
@@ -16,8 +15,9 @@ import {
   pixelBasedPreset,
 } from "react-email";
 
-const appName = "Reactive Resume";
-const logoUrl = "https://rxresu.me/icon/dark.svg";
+import { APP_NAME } from "@/utils/brand";
+
+const appName = APP_NAME;
 
 interface AuthEmailLayoutProps {
   preview: string;
@@ -69,10 +69,6 @@ function AuthEmailLayout({ preview, heading, intro, details, actionLabel, action
         <Body className="font-body m-0 bg-zinc-950 p-0 text-sm text-zinc-50">
           <Preview>{preview}</Preview>
           <Container className="mx-auto w-full max-w-xl bg-zinc-900 p-6 text-zinc-50">
-            <Section>
-              <Img src={logoUrl} alt={appName} width="48" height="48" className="block" />
-            </Section>
-
             <Section className="mt-6">
               <Heading className="font-heading text-2xl leading-0 font-medium tracking-tighter whitespace-break-spaces md:text-5xl">
                 {heading}
@@ -107,21 +103,7 @@ function AuthEmailLayout({ preview, heading, intro, details, actionLabel, action
 
               <Hr className="my-10 border-zinc-700" />
 
-              <Text className="mt-8 text-xs leading-1 opacity-40">By the community, for the community.</Text>
-              <Text className="text-xs leading-1 opacity-40">
-                A passion project by{" "}
-                <Link
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://amruthpillai.com"
-                  className="text-inherit underline underline-offset-2"
-                >
-                  Amruth Pillai
-                </Link>
-                .
-              </Text>
-
-              <Text className="font-heading mt-8 text-base font-medium tracking-tight opacity-80">Reactive Resume</Text>
+              <Text className="font-heading mt-8 text-base font-medium tracking-tight opacity-80">{appName}</Text>
             </Section>
           </Container>
         </Body>
@@ -143,7 +125,7 @@ export function ResetPasswordEmail({ url }: ResetPasswordEmailProps) {
       details="If this was not you, you can ignore this message and your password will remain unchanged."
       actionLabel="Create New Password"
       actionUrl={url}
-      outro="For security, only use links from emails sent by Reactive Resume."
+      outro={`For security, only use links from emails sent by ${appName}.`}
     />
   );
 }

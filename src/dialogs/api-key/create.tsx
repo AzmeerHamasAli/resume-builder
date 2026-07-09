@@ -86,7 +86,7 @@ const CreateApiKeyForm = ({ setApiKey }: CreateApiKeyFormProps) => {
         </DialogTitle>
         <DialogDescription>
           <Trans>
-            This will generate a new API key to access the Reactive Resume API to allow machines to interact with your
+            This will generate a new API key to access the resume API so machines can interact with your
             resume data.
           </Trans>
         </DialogDescription>

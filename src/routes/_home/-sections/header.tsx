@@ -4,13 +4,11 @@ import { Link } from "@tanstack/react-router";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useEffect, useRef } from "react";
 
-import { GithubStarsButton } from "@/components/input/github-stars-button";
 import { LocaleCombobox } from "@/components/locale/combobox";
 import { ThemeToggleButton } from "@/components/theme/toggle-button";
 import { BrandIcon } from "@/components/ui/brand-icon";
 import { Button } from "@/components/ui/button";
-
-import { ProductHuntBanner } from "./product-hunt-banner";
+import { APP_NAME } from "@/utils/brand";
 
 export function Header() {
   const y = useMotionValue(0);
@@ -26,10 +24,8 @@ export function Header() {
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
           if (current > 32 && current > lastScroll.current) {
-            // Scrolling down, hide
             y.set(-100);
           } else {
-            // Scrolling up, show
             y.set(0);
           }
           lastScroll.current = current;
@@ -46,16 +42,19 @@ export function Header() {
   return (
     <motion.header
       style={{ y: springY }}
-      className="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-background/80 backdrop-blur-lg transition-colors"
+      className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-card/85 backdrop-blur-lg transition-colors"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
     >
-      <ProductHuntBanner />
-
       <nav aria-label={t`Main navigation`} className="container mx-auto flex items-center gap-x-4 p-3 lg:px-12">
-        <Link to="/" className="transition-opacity hover:opacity-80" aria-label={t`Reactive Resume - Go to homepage`}>
+        <Link
+          to="/"
+          className="transition-opacity hover:opacity-80"
+          aria-label={t({ message: "Go to homepage", comment: "Home link; includes app name for screen readers" })}
+        >
           <BrandIcon className="size-10" />
+          <span className="sr-only">{APP_NAME}</span>
         </Link>
 
         <div className="ml-auto flex items-center gap-x-2">
@@ -69,20 +68,16 @@ export function Header() {
 
           <ThemeToggleButton />
 
-          <div className="hidden items-center gap-x-4 sm:flex">
-            <GithubStarsButton />
-
-            <Button
-              size="icon"
-              nativeButton={false}
-              aria-label={t`Go to dashboard`}
-              render={
-                <Link to="/dashboard">
-                  <ArrowRightIcon aria-hidden="true" />
-                </Link>
-              }
-            />
-          </div>
+          <Button
+            size="icon"
+            nativeButton={false}
+            aria-label={t`Go to dashboard`}
+            render={
+              <Link to="/dashboard">
+                <ArrowRightIcon aria-hidden="true" />
+              </Link>
+            }
+          />
         </div>
       </nav>
     </motion.header>

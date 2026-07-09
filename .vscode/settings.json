@@ -17,8 +17,12 @@
     "locales/**.po": true,
     "pnpm-lock.yaml": true
   },
-  "i18n-ally.enabledParsers": ["po"],
-  "i18n-ally.localesPaths": ["locales"],
+  "i18n-ally.enabledParsers": [
+    "po"
+  ],
+  "i18n-ally.localesPaths": [
+    "locales"
+  ],
   "i18n-ally.sourceLanguage": "en-US",
   "oxc.enable.oxfmt": true,
   "oxc.enable.oxlint": true,
@@ -29,13 +33,33 @@
     "locales/**.po": true,
     "pnpm-lock.yaml": true
   },
-  "tailwindCSS.classFunctions": ["cn", "cva"],
+  "tailwindCSS.classFunctions": [
+    "cn",
+    "cva"
+  ],
   "tailwindCSS.experimental.classRegex": [
-    ["class:\\s*?[\"'`]([^\"'`]*).*?,"],
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    [
+      "class:\\s*?[\"'`]([^\"'`]*).*?,"
+    ],
+    [
+      "cva\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ],
+    [
+      "cn\\(([^)]*)\\)",
+      "(?:'|\"|`)([^']*)(?:'|\"|`)"
+    ]
   ],
   "tailwindCSS.experimental.configFile": "src/styles/globals.css",
   "typescript.experimental.useTsgo": true,
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.keystyle": "nested",
+  "task.allowAutomaticTasks": true,
+  "debug.openDebug": "neverOpen",
+  "terminal.integrated.inheritEnv": false,
+  "tasks": {
+    "label": "lint on open",
+    "type": "shell",
+    "command": "npm run lint",
+    "runOn": "folderOpen"
+  }
 }

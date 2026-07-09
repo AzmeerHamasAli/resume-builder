@@ -89,7 +89,7 @@ function RouteComponent() {
   if (submitted) return <PostSignupScreen />;
 
   return (
-    <>
+    <div className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm sm:p-8">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-bold tracking-tight">
           <Trans>Create a new account</Trans>
@@ -251,13 +251,13 @@ function RouteComponent() {
       )}
 
       <SocialAuth />
-    </>
+    </div>
   );
 }
 
 function PostSignupScreen() {
   return (
-    <>
+    <div className="rounded-2xl border border-border/80 bg-card p-6 shadow-sm sm:p-8">
       <div className="space-y-1 text-center">
         <h1 className="text-2xl font-bold tracking-tight">
           <Trans>You've got mail!</Trans>
@@ -285,6 +285,6 @@ function PostSignupScreen() {
           </Link>
         }
       />
-    </>
+    </div>
   );
 }

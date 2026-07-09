@@ -1,7 +1,7 @@
 import type z from "zod";
 
 import { Trans } from "@lingui/react/macro";
-import { ArrowRightIcon, IconContext, type IconProps, WarningIcon } from "@phosphor-icons/react";
+import { IconContext, type IconProps, WarningIcon } from "@phosphor-icons/react";
 import { type RefObject, useMemo, useRef, useState } from "react";
 import { match } from "ts-pattern";
 import { useResizeObserver } from "usehooks-ts";
@@ -171,27 +171,19 @@ function PageContainer({ pageIndex, pageLayout, pageClassName, showPageNumbers =
 
       {metadata.page.format !== "free-form" && pageHeight > maxPageHeight && (
         <div className="absolute inset-s-0 top-full mt-4 print:hidden">
-          <a
-            rel="noopener"
-            target="_blank"
-            className="group/link"
-            href="https://docs.rxresu.me/guides/fitting-content-on-a-page"
-          >
-            <Alert className="max-w-sm text-yellow-600">
+          <Alert className="max-w-sm text-yellow-600">
               <WarningIcon color="currentColor" />
               <AlertTitle>
                 <Trans comment="Warning shown when resume content exceeds printable page height">
                   The content is too tall for this page, this may cause undesirable results when exporting to PDF.
                 </Trans>
               </AlertTitle>
-              <AlertDescription className="text-xs underline-offset-2 group-hover/link:underline">
-                <Trans comment="Help link text to documentation about fitting resume content onto a page">
-                  Learn more about how to fit content on a page
+              <AlertDescription className="text-xs">
+                <Trans comment="Hint when resume content exceeds printable page height">
+                  Reduce content, adjust spacing, or switch to a multi-page layout in design settings.
                 </Trans>
-                <ArrowRightIcon color="currentColor" className="ms-1 inline size-3" />
               </AlertDescription>
             </Alert>
-          </a>
         </div>
       )}
     </div>

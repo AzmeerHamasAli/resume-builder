@@ -9,12 +9,17 @@ import { LoadingScreen } from "@/components/layout/loading-screen";
 import { ResumePreview } from "@/components/resume/preview";
 import { useResumeStore } from "@/components/resume/store/resume";
 import { orpc, type RouterOutput } from "@/integrations/orpc/client";
+import { pageTitle } from "@/utils/brand";
+import { isReservedPublicUsername } from "@/utils/reserved-routes";
 import { cn } from "@/utils/style";
 
 type LoaderData = Omit<RouterOutput["resume"]["getBySlug"], "data"> & { data: ResumeData };
 
 export const Route = createFileRoute("/$username/$slug")({
   component: RouteComponent,
+  beforeLoad: ({ params }) => {
+    if (isReservedPublicUsername(params.username)) throw notFound();
+  },
   loader: async ({ context, params }) => {
     const { username, slug } = params;
     const resume = await context.queryClient.ensureQueryData(
@@ -24,7 +29,7 @@ export const Route = createFileRoute("/$username/$slug")({
     return { resume: resume as LoaderData };
   },
   head: ({ loaderData }) => ({
-    meta: [{ title: loaderData ? `${loaderData.resume.name} - Reactive Resume` : "Reactive Resume" }],
+    meta: [{ title: loaderData ? pageTitle(loaderData.resume.name) : pageTitle() }],
   }),
   onError: (error) => {
     if (error instanceof ORPCError && error.code === "NEED_PASSWORD") {

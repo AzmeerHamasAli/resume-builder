@@ -1,6 +1,8 @@
 import { toJsonSchemaCompat } from "@modelcontextprotocol/sdk/server/zod-json-schema-compat.js";
 import z from "zod";
 
+import { APP_DESCRIPTION, APP_NAME } from "@/utils/brand";
+import { env } from "@/utils/env";
 import { jsonPatchOperationSchema } from "@/utils/resume/patch";
 
 import { MCP_TOOL_NAME as T } from "./mcp-tool-names";
@@ -79,7 +81,7 @@ export function buildMcpServerCard(appVersion: string) {
       title: "Get Resume Analysis",
       description: [
         "Returns the latest saved AI analysis for a resume (scorecard, strengths, suggestions), if any.",
-        "Analyses are created from the Reactive Resume web app AI flow, not from MCP.",
+        "Analyses are created from the the web app web app AI flow, not from MCP.",
         `Returns JSON or a short message if none exists. Use \`${T.listResumes}\` to find resume IDs.`,
       ].join("\n"),
       inputSchema: toJsonSchemaCompat(z.object({ id: resumeId })),
@@ -117,7 +119,7 @@ export function buildMcpServerCard(appVersion: string) {
       name: T.importResume,
       title: "Import Resume",
       description: [
-        "Create a new resume from a full ResumeData JSON object (e.g. an exported file from Reactive Resume).",
+        "Create a new resume from a full ResumeData JSON object (e.g. an exported file from the web app).",
         "A random name and slug are assigned automatically, like the web importer.",
         `For small edits to an existing resume, prefer \`${T.patchResume}\` instead of re-importing.`,
         "Large payloads may exceed MCP client message limits — in that case, use the web UI or the HTTP API.",
@@ -355,22 +357,17 @@ export function buildMcpServerCard(appVersion: string) {
           type: "string",
           title: "API key",
           description:
-            "Optional. Create a key under Account → API Keys. Forwarded as the x-api-key header when not using OAuth.",
+            "Optional. Forwarded as the x-api-key header when not using OAuth.",
           "x-from": { header: "x-api-key" },
         },
       },
     },
     serverInfo: {
-      name: "reactive-resume",
+      name: "resume-builder",
       version: appVersion,
-      title: "Reactive Resume",
-      websiteUrl: "https://rxresu.me",
-      description:
-        "Reactive Resume is a free and open-source resume builder. Use this MCP server to interact with your resume using an LLM of your choice.",
-      icons: [
-        { src: "https://rxresu.me/icon/light.svg", mimeType: "image/svg+xml", theme: "light" as const },
-        { src: "https://rxresu.me/icon/dark.svg", mimeType: "image/svg+xml", theme: "dark" as const },
-      ],
+      title: APP_NAME,
+      websiteUrl: env.APP_URL,
+      description: `${APP_DESCRIPTION} Use this MCP server to manage resumes with an LLM.`,
     },
     tools,
     prompts,
